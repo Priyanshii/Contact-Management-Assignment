@@ -1,46 +1,70 @@
-# Getting Started with Create React App
+# Contact Management App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is Contact Management Application built with ReactJS, TypeScript, TailwindCSS, React Router v6, React Query (TanStack Query) and Redux Toolkit. It allows users to manage contacts and visualize COVID-19 data through interactive charts and maps.
 
-## Available Scripts
+### Features
 
-In the project directory, you can run:
+- Add, view, edit, and delete contacts.
+- Display a list of all contacts.
+- Interactive dashboard with a line graph showing COVID-19 case fluctuations.
+- Interactive map with markers displaying COVID-19 data by country.
+
+### Getting Started
+
+Prerequisites
+
+Ensure you have the following installed:
+
+*Node.js*
+*npm or Yarn*
+
+## Installation
+
+Clone the Repository:
+
+git clone https://github.com/your-username/contact-management-app.git
+cd contact-management-app
+
+Install Dependencies:
+
+### `npm install`
+
+Running the Application
+Start the Development Server:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This will start the app in development mode. Open your browser and navigate to http://localhost:3000.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Build the App for Production:
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This will build the app for production in the build folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## API Endpoints
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The app uses the following API endpoints to fetch COVID-19 data:
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Worldwide COVID-19 Data:**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+URL: https://disease.sh/v3/covid-19/all
+Description: Fetches global COVID-19 data including total cases, affected countries, deaths, recovered, and active cases, Test taken etc.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Country-Specific COVID-19 Data:**
 
-## Learn More
+URL: https://disease.sh/v3/covid-19/countries
+Description: Fetches COVID-19 data for each country including country name, total cases, deaths, recovered, and active cases.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**COVID-19 Historical Data:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+URL: https://disease.sh/v3/covid-19/historical/all?lastdays=all
+Description: Fetches historical global COVID-19 data to visualize the cases over time.
+
+
+## Usage
+
+- Manage Contacts: Add new contacts, view contact details, edit or delete existing contacts.
+- Dashboard: View a line graph of COVID-19 cases fluctuations and explore country-specific data on the interactive map.
