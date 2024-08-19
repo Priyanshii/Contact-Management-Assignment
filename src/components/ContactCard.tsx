@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Person, deleteContact, setSelectedContact, setShowContactForm } from '../store/features/contactSlice';
+import { Person, deleteContact, setSelectedContactId, setShowContactForm } from '../store/features/contactSlice';
 import { useAppDispatch } from '../store/store';
 import { CiCircleCheck } from "react-icons/ci";
 import { ImCancelCircle } from "react-icons/im";
@@ -11,7 +11,7 @@ interface ContactDetailsCardProps {
 
 const ContactCard: React.FC<ContactDetailsCardProps> = ({ contact, index }) => {
 
-    const { firstName, lastName, phoneNumber, isActive } = contact;
+    const { id, firstName, lastName, phoneNumber, isActive } = contact;
 
     const [showDetails, setShowDetails] = useState<boolean>();
 
@@ -22,17 +22,17 @@ const ContactCard: React.FC<ContactDetailsCardProps> = ({ contact, index }) => {
     }
 
     const handleDeletecontact = () => {
-        dispatch(deleteContact(index));
+        dispatch(deleteContact(id));
     }
 
     const handleEditDetails = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         dispatch(setShowContactForm(true));
-        dispatch(setSelectedContact(contact));
+        dispatch(setSelectedContactId(id));
     };
 
     return (
-        <div className={`flex-1 min-w-[300px] max-w-[400px] h-[280px] sm:h-[240px] rounded-md flex flex-col justify-between items-start gap-4 bg-white border-solid border-b-2 border-gray-200 p-4 shadow-md`}>
+        <div className={`w-[400px] h-[280px] lg:w-[380px] sm:h-[240px] rounded-md flex flex-col justify-between items-start gap-4 bg-white border-solid border-b-2 border-gray-200 p-4 shadow-md`}>
             <div className='flex flex-row items-start justify-normal gap-1 text-xl text-gray-700 font-medium'>
                 <p className='mr-1'>{index + 1}.</p>
                 <div className='w-full flex flex-col justify-normal items-start gap-2 flex-wrap'>

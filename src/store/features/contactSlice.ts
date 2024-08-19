@@ -2,6 +2,7 @@ import { RootState } from "./../store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Person {
+    id: string;
     firstName: string;
     lastName: string;
     phoneNumber: string;
@@ -11,13 +12,13 @@ export interface Person {
 interface ContactState {
     contactList: Person[];
     showContactForm: boolean;
-    selectedContact: Person | null;
+    selectedContactId: string | null;
 }
 
 const initialState: ContactState = {
     contactList: [],
     showContactForm: false,
-    selectedContact: null,
+    selectedContactId: null,
 };
 
 export const contactSlice = createSlice({
@@ -27,18 +28,20 @@ export const contactSlice = createSlice({
         addToContacts: (state, action: PayloadAction<Person>) => {
             state.contactList = [...state.contactList, action.payload];
         },
-        updateContact: (state, action: PayloadAction<{ index: number; contact: Person }>) => {
-            const { index, contact } = action.payload;
-            state.contactList[index] = contact;
+        updateContact: (state, action: PayloadAction<{ id: string, contact: Person }>) => {
+            const { id, contact } = action.payload;
+            state.contactList = state.contactList.map((item) =>
+                item.id === id ? contact : item
+            );
         },
         setShowContactForm: (state, action: PayloadAction<boolean>) => {
             state.showContactForm = action.payload;
         },
-        setSelectedContact: (state, action: PayloadAction<Person | null>) => {
-            state.selectedContact = action.payload;
+        setSelectedContactId: (state, action: PayloadAction<string | null>) => {
+            state.selectedContactId = action.payload;
         },
-        deleteContact: (state, action: PayloadAction<number>) => {
-            state.contactList = state.contactList.filter((_, index) => index !== action.payload);
+        deleteContact: (state, action: PayloadAction<string>) => {
+            state.contactList = state.contactList.filter((contact) => contact.id !== action.payload);
         }
     },
 });
@@ -47,7 +50,7 @@ export const {
     addToContacts,
     updateContact,
     setShowContactForm,
-    setSelectedContact,
+    setSelectedContactId,
     deleteContact
 } = contactSlice.actions;
 

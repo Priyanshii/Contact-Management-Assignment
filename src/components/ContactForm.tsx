@@ -1,27 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { addToContacts, updateContact, setShowContactForm, setSelectedContact } from '../store/features/contactSlice';
+import { addToContacts, updateContact, setShowContactForm, setSelectedContactId } from '../store/features/contactSlice';
 import { Person } from '../store/features/contactSlice';
+import { v4 as uuidv4 } from "uuid";
 
 const ContactForm: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const ref = useRef<HTMLDivElement | null>(null);
 
-    const { contactList, selectedContact } = useAppSelector(state => state.contact);
+    const { contactList, selectedContactId } = useAppSelector(state => state.contact);
 
-    const [formData, setFormData] = useState({
+    const initialFormData = {
+        id: '',
         firstName: '',
         lastName: '',
         phoneNumber: '',
         isActive: true,
-    });
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
 
     useEffect(() => {
-        if (selectedContact !== null) {
-            setFormData(selectedContact);
+        if (selectedContactId !== null) {
+            const foundContact = contactList?.find((contact) => contact.id === selectedContactId);
+            setFormData(foundContact || initialFormData);
         }
-    }, [selectedContact]);
+    }, [selectedContactId]);
+
+    const generateUniqueId = () => {
+        return uuidv4();
+    };
 
     const handleFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -34,17 +43,17 @@ const ContactForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (selectedContact) {
+        if (selectedContactId) {
             // Edit existing contact
-            dispatch(updateContact({ index: contactList.indexOf(selectedContact), contact: formData }));
+            dispatch(updateContact({ id: selectedContactId, contact: formData }));
         } else {
             // Add new contact
-            dispatch(addToContacts(formData));
+            dispatch(addToContacts({ ...formData, id: generateUniqueId() }));
         }
 
         // Close form and reset selected contact
         dispatch(setShowContactForm(false));
-        dispatch(setSelectedContact(null));
+        dispatch(setSelectedContactId(null));
     };
 
     const handleCancel = () => {
@@ -54,11 +63,13 @@ const ContactForm: React.FC = () => {
 
     const handleOutsideClick = (event: any) => {
         if (ref.current && !ref.current.contains(event.target)) {
+            //Close Modal if clicked outside the modal
             handleCancel();
         }
     };
-
+    
     useEffect(() => {
+        //Click Event listener for clicks outside Modal 
         document.addEventListener("click", handleOutsideClick);
 
         return () => {
@@ -118,7 +129,7 @@ const ContactForm: React.FC = () => {
 
                     </section>
                     <section className='mt-4 w-full flex flex-row items-center justify-center gap-6'>
-                        <button type="submit" className='px-4 py-2 bg-cyan-700 text-white rounded-md cursor-pointer'>{selectedContact ? 'Save Changes' : 'Add Contact'}</button>
+                        <button type="submit" className='px-4 py-2 bg-cyan-700 text-white rounded-md cursor-pointer'>{selectedContactId ? 'Save Changes' : 'Add Contact'}</button>
                         <button type="button" className='px-4 py-2 bg-cyan-700 text-white rounded-md cursor-pointer' onClick={handleCancel}>Cancel</button>
                     </section>
                 </form>

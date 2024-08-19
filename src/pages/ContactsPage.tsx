@@ -2,7 +2,7 @@ import React from 'react';
 import ContactList from '../components/ContactList';
 import ContactForm from '../components/ContactForm';
 import { useAppSelector, useAppDispatch } from '../store/store';
-import { setShowContactForm, setSelectedContact } from '../store/features/contactSlice';
+import { setShowContactForm, setSelectedContactId } from '../store/features/contactSlice';
 
 const Contacts = () => {
     const dispatch = useAppDispatch();
@@ -12,7 +12,7 @@ const Contacts = () => {
     const handleCreateContact = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         dispatch(setShowContactForm(true));
-        dispatch(setSelectedContact(null)); // selectedContact is null for an add contact 
+        dispatch(setSelectedContactId(null)); // selectedContactId is null for an add contact 
     };
 
     return (
