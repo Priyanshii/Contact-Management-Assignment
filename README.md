@@ -22,8 +22,9 @@ Ensure you have the following installed:
 
 Clone the Repository:
 
-git clone https://github.com/your-username/contact-management-app.git
-cd contact-management-app
+`git clone https://github.com/your-username/contact-management-app.git`
+
+`cd contact-management-app`
 
 Install Dependencies:
 
@@ -50,12 +51,14 @@ The app uses the following API endpoints to fetch COVID-19 data:
 **Worldwide COVID-19 Data:**
 
 URL: https://disease.sh/v3/covid-19/all
+
 Description: Fetches global COVID-19 data including total cases, affected countries, deaths, recovered, and active cases, Test taken etc.
 
 
 **Country-Specific COVID-19 Data:**
 
 URL: https://disease.sh/v3/covid-19/countries
+
 Description: Fetches COVID-19 data for each country including country name, total cases, deaths, recovered, and active cases.
 
 **COVID-19 Historical Data:**
