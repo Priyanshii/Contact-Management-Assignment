@@ -65,7 +65,7 @@ const ContactCard: React.FC<ContactDetailsCardProps> = ({ contact, index }) => {
                 <button className='flex-1 px-3 py-1 text-lg text-white bg-green-600 border-2 border-solid border-transparent font-medium rounded-md hover:bg-green-700 active:bg-green-700 cursor-pointer' onClick={handleEditDetails}>
                     Edit
                 </button>
-                <button className='flex-1 px-3 py-1 text-lg text-white bg-red-600 border-2 border-solid border-transparent font-medium rounded-md hover:bg-red-700 active:bg-red-800 cursor-pointer' onClick={handleDeletecontact}>
+                <button className='flex-1 px-3 py-1 text-lg text-white bg-red-600 border-2 border-solid border-transparent font-medium rounded-md hover:bg-red-800 active:bg-red-800 cursor-pointer' onClick={handleDeletecontact}>
                     Delete
                 </button>
             </div>

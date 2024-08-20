@@ -80,28 +80,29 @@ const ContactForm: React.FC = () => {
     return (
         <div ref={ref} className='relative w-auto md:w-[500px] h-[480px] bg-white py-8 px-10'>
             <div className='w-full h-full flex flex-col items-center justify-evenly'>
+                <h3 className='text-2xl font-semibold text-gray-700'>{selectedContactId ? 'Edit Contact' : 'Add Contact'}</h3>
                 <form onSubmit={handleSubmit} className="w-full flex flex-col justify-between items-start gap-8">
                     <section className='w-full flex flex-col md:flex-row items-center justify-between gap-8'>
                         <input
                             type="text"
                             name='firstName'
                             placeholder='First Name'
-                            value={formData.firstName}
+                            value={formData?.firstName}
                             onChange={handleFormData}
                             className='text-base p-3 pl-1 w-full md:w-44 border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
                             required
-                            minLength={2}
+                            minLength={1}
                             maxLength={40}
                         />
                         <input
                             type="text"
                             name='lastName'
                             placeholder='Last Name'
-                            value={formData.lastName}
+                            value={formData?.lastName}
                             onChange={handleFormData}
                             className='text-base p-3 pl-1 w-full md:w-44 border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
                             required
-                            minLength={2}
+                            minLength={1}
                             maxLength={40}
                         />
                     </section>
@@ -109,7 +110,7 @@ const ContactForm: React.FC = () => {
                         type="tel"
                         name='phoneNumber'
                         placeholder='Phone number'
-                        value={formData.phoneNumber}
+                        value={formData?.phoneNumber}
                         onChange={handleFormData}
                         className='text-base p-3 pl-1 w-full border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
                     />
@@ -121,7 +122,7 @@ const ContactForm: React.FC = () => {
                                 type="checkbox"
                                 value=""
                                 className="sr-only peer"
-                                checked={formData.isActive}
+                                checked={formData?.isActive}
                                 onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
                             />
                             <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-1 peer-focus:ring-cyan-300 dark:peer-focus:ring-cyan-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-cyan-600"></div>
@@ -129,8 +130,8 @@ const ContactForm: React.FC = () => {
 
                     </section>
                     <section className='mt-4 w-full flex flex-row items-center justify-center gap-6'>
-                        <button type="submit" className='px-4 py-2 bg-cyan-700 text-white rounded-md cursor-pointer'>{selectedContactId ? 'Save Changes' : 'Add Contact'}</button>
-                        <button type="button" className='px-4 py-2 bg-cyan-700 text-white rounded-md cursor-pointer' onClick={handleCancel}>Cancel</button>
+                        <button type="submit" className='px-4 py-2 bg-cyan-700 text-white hover:bg-cyan-800 rounded-md cursor-pointer'>{selectedContactId ? 'Save Changes' : 'Add Contact'}</button>
+                        <button type="button" className='px-4 py-2 bg-cyan-700 text-white hover:bg-cyan-800 rounded-md cursor-pointer' onClick={handleCancel}>Cancel</button>
                     </section>
                 </form>
             </div>

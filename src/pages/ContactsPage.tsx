@@ -18,13 +18,13 @@ const Contacts = () => {
     return (
         <div className='h-full flex justify-center items-center'>
             <div className='w-full flex flex-col justify-center items-center gap-8'>
-                <button onClick={handleCreateContact} className='mt-4 px-6 py-3 bg-cyan-700 text-white font-medium uppercase rounded-md cursor-pointer'>
+                <button onClick={handleCreateContact} className='mt-4 px-6 py-3 bg-cyan-700 text-white font-medium uppercase hover:bg-cyan-800 rounded-md cursor-pointer'>
                     Create Contact
                 </button>
                 {contactList.length === 0 ? (
                     <div className='mt-4 w-[60%] min-w-[240px] flex flex-col items-center justify-center text-center p-6 py-20 bg-gray-100 border border-gray-300 rounded-lg'>
                         <p className='uppercase text-gray-500 font-semibold'>No contact found.</p>
-                        <p className='text-gray-600'>Please add a contact using the "Add Contact" button.</p>
+                        <p className='text-gray-600'>Please add a contact using the "Create Contact" button.</p>
                     </div>
                 ) : (
                     <ContactList />
